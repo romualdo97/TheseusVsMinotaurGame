@@ -5,10 +5,12 @@ A Unity mini game for a mini jam session.
 [Theseus minotaur](https://estivalet.github.io/theseus-minotaur/)
 
 ## Planning 
-- [ready] Design levels (Using recursive backtracker)
+### 4 hours point
+- [ready] Generate levels (Using recursive backtracker)
 - [ready] Render the maze
 - [ready] Define a maze graph
 - [ready] Write pathfinding
+### >4 hours
 - [progress] Game logic
 
 ---
