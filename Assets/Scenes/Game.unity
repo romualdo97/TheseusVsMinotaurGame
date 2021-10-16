@@ -419,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.457684, y: -0.000000005117021, z: 0.000000040533873, w: 0.8891149}
-  m_LocalPosition: {x: 0, y: 6.63, z: -2.31}
+  m_LocalPosition: {x: 4.56, y: 6.63, z: -1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -436,6 +436,8 @@ GameObject:
   - component: {fileID: 1689883960}
   - component: {fileID: 1689883959}
   - component: {fileID: 1689883958}
+  - component: {fileID: 1689883957}
+  - component: {fileID: 1689883961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -443,6 +445,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1689883957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689883956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d9e6accb2ad69468e55782a3f472ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_world: {fileID: 401933274}
+  m_nodeToNodeDuration: 0.5
 --- !u!23 &1689883958
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -506,3 +522,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1689883961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689883956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ad7fbf0ba1e9746a7725706e8cc452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShouldMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1689883957}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnShouldMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

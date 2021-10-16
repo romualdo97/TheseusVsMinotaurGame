@@ -9,7 +9,7 @@ using UnityEngine;
 public class MazeGenerator
 {
     // Simple table of direction vectors
-    private readonly Dictionary<MazeCellEdges, Vector2Int> DIRECTIONS = new Dictionary<MazeCellEdges, Vector2Int>()
+    public static readonly Dictionary<MazeCellEdges, Vector2Int> DIRECTIONS = new Dictionary<MazeCellEdges, Vector2Int>()
     {
         { MazeCellEdges.Top, Vector2Int.up },
         { MazeCellEdges.Bottom, Vector2Int.down },

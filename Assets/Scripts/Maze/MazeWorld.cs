@@ -18,6 +18,8 @@ public class MazeWorld : MonoBehaviour
         }
     }
 
+    public MazeGenerator MapInfo { get => m_mazeGenerator; }
+
     [Header("Data")]
     [SerializeField]
     private MazeLevel m_mazeLevelData = null;
@@ -42,11 +44,6 @@ public class MazeWorld : MonoBehaviour
         RenderWorld();
     }
 
-    public void SearchPath()
-    {
-
-    }
-
     private void SetupMazeGenerator()
     {
         m_mazeGenerator = new MazeGenerator(m_mazeLevelData.Width, m_mazeLevelData.Height, m_mazeLevelData.Seed, m_mazeLevelData.ChanceOfCycles);
@@ -64,7 +61,7 @@ public class MazeWorld : MonoBehaviour
 
             // Instantiate
             var cellObject = Instantiate(m_cellPrefab, transform);
-            cellObject.transform.localPosition = new Vector3((float)cell.x, 0, (float)cell.y);
+            cellObject.transform.localPosition = new Vector3((float)cell.x + 0.5f, 0, (float)cell.y + 0.5f);
 
             // Hide the walls of the cell
             if (!m_mazeGenerator.IsWallAt(MazeCellEdges.Top, cell))
