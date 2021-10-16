@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[DefaultExecutionOrder(-1)]
 public class MazeWorld : MonoBehaviour
 {
+    // No need for scene lookup because we will assume this component will awake before than any other
+    public static MazeWorld Instance { get; private set; }
+    private static int s_instanceCount = 0;
+
     // Properties
     public MazeLevel CurrentLevel {
         get 
@@ -36,6 +41,11 @@ public class MazeWorld : MonoBehaviour
         // Some assertions
         Assert.IsNotNull(m_mazeLevelData, "Please define the first level data");
         Assert.IsNotNull(m_cellPrefab, "Please define the cell prefab");
+        Assert.IsTrue(s_instanceCount == 0, "World was already instanced... you should guarantee only one World in this scene."); Assert.IsTrue(s_instanceCount == 0, "World was already instanced... you should guarantee only one World in this scene.");
+
+        // Init singleton
+        Instance = this;
+        ++s_instanceCount;
 
         // Setup the world generator
         SetupMazeGenerator();
@@ -46,8 +56,12 @@ public class MazeWorld : MonoBehaviour
 
     private void SetupMazeGenerator()
     {
+        // Generate world
         m_mazeGenerator = new MazeGenerator(m_mazeLevelData.Width, m_mazeLevelData.Height, m_mazeLevelData.Seed, m_mazeLevelData.ChanceOfCycles);
         m_mazeGenerator.GenerateWorld();
+
+        // Init the unity seed
+        Random.InitState(m_mazeLevelData.Seed);
     }
 
     private void RenderWorld()

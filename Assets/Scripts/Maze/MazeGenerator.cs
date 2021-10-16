@@ -49,20 +49,25 @@ public class MazeGenerator
 
     public bool IsWallAt(MazeCellEdges cellEdge, Vector2Int cellCoord)
     {
-        bool isValid = cellCoord.x >= 0 && cellCoord.x < m_width && cellCoord.y >= 0 && cellCoord.y < m_height;
+        bool isValid = IsValidCoord(cellCoord);
         if (!isValid) return false;
 
         int cellIndex = cellCoord.x + m_width * cellCoord.y;
         return m_graph[cellIndex].Connections[(int)cellEdge] == null;
     }
 
+    public bool IsValidCoord(Vector2Int cellCoord)
+    {
+        return cellCoord.x >= 0 && cellCoord.x < m_width && cellCoord.y >= 0 && cellCoord.y < m_height;
+    }
+
     public bool SearchPath(Vector2Int start, Vector2Int end, out List<MazeCellNode> path)
     {
         // Check if valid input
-        bool startIsValid = start.x >= 0 && start.x < m_width && start.y >= 0 && start.y < m_height;
+        bool startIsValid = IsValidCoord(start);
         if (startIsValid)
         {
-            bool endIsValid = end.x >= 0 && end.x < m_width && end.y >= 0 && end.y < m_height;
+            bool endIsValid = IsValidCoord(end);
             if (!endIsValid)
             {
                 path = null;
@@ -113,7 +118,7 @@ public class MazeGenerator
             Vector2Int newCoord = cellCord + DIRECTIONS[direction];
 
             // Check if new coord is inside the grid
-            bool isValid = newCoord.x >= 0 && newCoord.x < m_width && newCoord.y >= 0 && newCoord.y < m_height;
+            bool isValid = IsValidCoord(newCoord);
             if (!isValid) continue;
 
             var newCellIndex = newCoord.x + m_width * newCoord.y;
@@ -162,7 +167,7 @@ public class MazeGenerator
                     Vector2Int currCoord = new Vector2Int(i % m_width, Mathf.FloorToInt((float)i / m_width));
                     Vector2Int newCoord = currCoord + DIRECTIONS[direction];
 
-                    bool isValid = newCoord.x >= 0 && newCoord.x < m_width && newCoord.y >= 0 && newCoord.y < m_height;
+                    bool isValid = IsValidCoord(newCoord);
                     if (!isValid) continue;
 
                     mazeNode.Connect(direction, m_graph[newCoord.x + m_width * newCoord.y]);
@@ -200,7 +205,7 @@ public class MazeGenerator
                         Vector2Int currCoord = new Vector2Int(i % m_width, Mathf.FloorToInt((float)i / m_width));
                         Vector2Int newCoord = currCoord + DIRECTIONS[direction];
 
-                        bool isValid = newCoord.x >= 0 && newCoord.x < m_width && newCoord.y >= 0 && newCoord.y < m_height;
+                        bool isValid = IsValidCoord(newCoord);
                         if (!isValid) continue;
 
                         node.Connect(direction, m_graph[newCoord.x + m_width * newCoord.y]);

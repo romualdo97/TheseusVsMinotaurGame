@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MazeLevel", menuName = "MazeLevel")]
 public class MazeLevel : ScriptableObject
 {
+    [Header("World")]
     [Tooltip("How many horizontal cells for the maze?")]
     public int Width = 2;
 
@@ -18,4 +19,11 @@ public class MazeLevel : ScriptableObject
     [Tooltip("Chance of adding cycles to the maze graph")]
     [Range(0f, 1f)]
     public float ChanceOfCycles = 0;
+
+    [Header("Entities")]
+    [Tooltip("The initial coord of the player, invalid coord means random initial pos")]
+    public Vector2Int PlayerPos;
+
+    [Tooltip("The initial coord of the enemy, invalid coord means random initial pos")]
+    public Vector2Int EnemyPos;
 }

@@ -272,13 +272,14 @@ GameObject:
   - component: {fileID: 740037173}
   - component: {fileID: 740037172}
   - component: {fileID: 740037171}
+  - component: {fileID: 740037174}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &740037171
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -342,6 +343,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &740037174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740037170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b998ca2a15db74286209e5dac1acb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_nodeToNodeDuration: 0.5
+  m_player: {fileID: 1689883957}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d9e6accb2ad69468e55782a3f472ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_world: {fileID: 401933274}
   m_nodeToNodeDuration: 0.5
 --- !u!23 &1689883958
 MeshRenderer:

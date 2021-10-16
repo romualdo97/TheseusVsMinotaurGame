@@ -2,30 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : CharacterEntity
 {
-    public Vector2Int MazePos { get => m_mazePos; }
-
-    [Header("Other managers")]
-    [SerializeField]
-    private MazeWorld m_world;
-
-    // Data
-    private Vector2Int m_mazePos; // Position in the maze
-
-    // For animating
-    [Header("Animations")]
-    [SerializeField]
-    private float m_nodeToNodeDuration = 0.5f;
-    private float m_elapsedTime = 0;
-    private bool m_isTraversing = false;
-    private Vector3 m_start;
-    private Vector3 m_next;
-
     private void Start()
     {
-        m_start = transform.position = MazePosToWorldPos(m_mazePos);
-        m_elapsedTime = m_nodeToNodeDuration + 1f;
+        InitEntity();
     }
 
     private void Update()
@@ -53,6 +34,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    protected override void CalculateInitialMazePos()
+    {
+        if (m_world.MapInfo.IsValidCoord(m_world.CurrentLevel.PlayerPos))
+        {
+            m_mazePos = m_world.CurrentLevel.PlayerPos;
+        }
+        else
+        {
+            base.CalculateInitialMazePos();
+        }
+    }
+
     public void OnShouldMove(MazeCellEdges dir)
     {
         // Check movement
@@ -71,10 +64,5 @@ public class Player : MonoBehaviour
         m_next = newPos;
         m_isTraversing = true;
         m_elapsedTime = 0.0f;
-    }
-
-    private Vector3 MazePosToWorldPos(Vector2Int mazePos)
-    {
-        return new Vector3(mazePos.x + 0.5f, 0.25f, mazePos.y + 0.5f);
     }
 }

@@ -27,15 +27,12 @@ public class MazeCellNode
     public MazeCellNode[] Connections { get => m_connections; }
     public bool HasConnections { get; private set; }
 
-    // The id of this node in the graph...
-    private int m_id = -1;
-
     // The connections/edges of this node (only 4 for each cell)
     private MazeCellNode[] m_connections = new MazeCellNode[4] { null, null, null, null };
 
     public MazeCellNode(int id)
     {
-        m_id = id;
+        Id = id;
     }
 
     public void Connect(MazeCellEdges edge, MazeCellNode other) // Connect... or join to vertices

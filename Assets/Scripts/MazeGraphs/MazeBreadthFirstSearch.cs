@@ -79,7 +79,7 @@ public static class MazeBreadthFirstSearch
         MazeCellNode curr = end;
         while (curr != start)
         {
-            path.Add(cameFrom[curr]);
+            path.Add(curr);
             curr = cameFrom[curr];
         }
 

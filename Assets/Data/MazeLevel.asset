@@ -16,3 +16,5 @@ MonoBehaviour:
   Height: 10
   Seed: 255
   ChanceOfCycles: 0.372
+  PlayerPos: {x: 0, y: 0}
+  EnemyPos: {x: 1, y: 0}
