@@ -1,4 +1,4 @@
-using System.Collections;
+#define ENABLE_SUPREME_KILLER_INSTINCT
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -21,7 +21,7 @@ public class Enemy : CharacterEntity
     private void Update()
     {
         // Just for debugging
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             GoToPlayerNode();
         }
@@ -63,7 +63,11 @@ public class Enemy : CharacterEntity
         }
         else
         {
-            base.CalculateInitialMazePos();
+            do
+            {
+                base.CalculateInitialMazePos();
+            }
+            while (MazePos == m_player.MazePos || !m_world.MapInfo.IsValidCoord(MazePos));
         }
     }
 
@@ -77,8 +81,29 @@ public class Enemy : CharacterEntity
             return;
         }
 
+        // Only moves two cells
+        // If he can move one square horizontally and get closer, he will do that
+        // Will do this only if after the movement is closer to player (killer instinct)
+        // Distances should be calculated using manhattan (only 4 possible directions)
+
+        // for each step until it reaches two steps
+        //      if (can move horizontally?)
+        //          if (will get closer?)
+        //              horizontalStep()
+        //      else if (can move vertically?)
+        //          if (will get closer?)
+        //              verticalStep()
+        
+        List<Vector2Int> coordsPath = new List<Vector2Int>();
+
+#if ENABLE_SUPREME_KILLER_INSTINCT
+        // This minotaur will always find the player
+        coordsPath = m_world.MapInfo.CalculateCoordsPath(foundPath);
+#else
+        throw new System.InvalidOperationException("Here there are only trash ideas... continue thinking");
+#endif
+
         // Traverse the found path
-        List<Vector2Int> coordsPath = m_world.MapInfo.CalculateCoordsPath(foundPath);
         TraversePath(coordsPath);
     }
 
@@ -87,5 +112,22 @@ public class Enemy : CharacterEntity
         m_path = path;
         m_isTraversing = true;
         m_elapsedTime = m_nodeToNodeDuration + 1f;
+    }
+
+    private bool WillGetCloserToPlayer(Vector2Int currPos, Vector2Int nextCoord)
+    {
+        // Check if Will get closer using manhattan distance
+        Vector2Int fromNewPosToPlayerPos = m_player.MazePos - nextCoord;
+        int newDistance = Mathf.Abs(fromNewPosToPlayerPos.x) + Mathf.Abs(fromNewPosToPlayerPos.y);
+        Vector2Int fromCurrPosToPlayerPos = m_player.MazePos - currPos;
+        int currDistance = Mathf.Abs(fromCurrPosToPlayerPos.x) + Mathf.Abs(fromCurrPosToPlayerPos.y);
+
+        // New position will satisfy the killer instinct of the minotaur
+        if (newDistance <= currDistance)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

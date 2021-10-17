@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: MazeLevel
+  m_Name: PerfectSubtree
   m_EditorClassIdentifier: 
+  Name: Perfect Subtree
   Width: 10
   Height: 10
-  Seed: 255
-  ChanceOfCycles: 0.372
+  Seed: 29
+  ChanceOfCycles: 0
   PlayerPos: {x: 0, y: 0}
-  EnemyPos: {x: 1, y: 0}
+  EnemyPos: {x: 0, y: 0}

@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Player : CharacterEntity
 {
+    public Vector2Int PrevMazePos { get; private set; }
+
+    [SerializeField]
+    private Enemy m_enemy;
+
     private void Start()
     {
+        Assert.IsNotNull(m_enemy, "Player requires a reference of enemy");
+
         InitEntity();
     }
 
@@ -42,7 +50,11 @@ public class Player : CharacterEntity
         }
         else
         {
-            base.CalculateInitialMazePos();
+            do
+            {
+                base.CalculateInitialMazePos();
+            }
+            while (MazePos == m_enemy.MazePos || !m_world.MapInfo.IsValidCoord(MazePos));
         }
     }
 
@@ -52,6 +64,7 @@ public class Player : CharacterEntity
         if (m_world.MapInfo.IsWallAt(dir, m_mazePos)) return;
 
         // Start movement
+        PrevMazePos = m_mazePos;
         Vector2Int goal = m_mazePos + MazeGenerator.DIRECTIONS[dir];
         Vector3 worldGoal = MazePosToWorldPos(goal);
         StartMoving(worldGoal);

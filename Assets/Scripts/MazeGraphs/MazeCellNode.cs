@@ -1,3 +1,4 @@
+using UnityEngine;
 using System.Collections.Generic;
 
 public enum MazeCellEdges
@@ -26,13 +27,17 @@ public class MazeCellNode
     public int Id { get; private set; }
     public MazeCellNode[] Connections { get => m_connections; }
     public bool HasConnections { get; private set; }
+    public Vector2Int Coord { get => new Vector2Int(Id % m_mazeWidth, Mathf.FloorToInt((float)Id / m_mazeWidth)); }
+
 
     // The connections/edges of this node (only 4 for each cell)
     private MazeCellNode[] m_connections = new MazeCellNode[4] { null, null, null, null };
+    private int m_mazeWidth;
 
-    public MazeCellNode(int id)
+    public MazeCellNode(int id, int mazeWidth)
     {
         Id = id;
+        m_mazeWidth = mazeWidth;
     }
 
     public void Connect(MazeCellEdges edge, MazeCellNode other) // Connect... or join to vertices

@@ -20,7 +20,7 @@ public abstract class CharacterEntity : MonoBehaviour
     protected MazeWorld m_world;
     protected Vector2Int m_mazePos; // Position in the maze
 
-    protected virtual void InitEntity()
+    public virtual void InitEntity()
     {
         m_world = MazeWorld.Instance;
         Assert.IsNotNull(m_world, "World reference is required");
@@ -30,6 +30,7 @@ public abstract class CharacterEntity : MonoBehaviour
 
         m_start = transform.position = MazePosToWorldPos(m_mazePos);
         m_elapsedTime = m_nodeToNodeDuration + 1f;
+        m_isTraversing = false;
     }
 
     protected virtual void CalculateInitialMazePos()

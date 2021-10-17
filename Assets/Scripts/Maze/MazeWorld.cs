@@ -19,7 +19,18 @@ public class MazeWorld : MonoBehaviour
         set
         {
             m_mazeLevelData = value;
-            // TODO: Manage new level generation
+
+            // Destroy world
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // Setup the world generator
+            SetupMazeGenerator();
+
+            // Render the world
+            RenderWorld();
         }
     }
 

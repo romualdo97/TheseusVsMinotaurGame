@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "MazeLevel", menuName = "MazeLevel")]
+[CreateAssetMenu(fileName = "MazeLevel", menuName = "FancyMazeWorld/MazeLevel")]
 public class MazeLevel : ScriptableObject
 {
+    [Header("Metadata")]
+    public string Name = "Mocky pocky";
+
     [Header("World")]
     [Tooltip("How many horizontal cells for the maze?")]
     public int Width = 2;

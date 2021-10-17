@@ -15,13 +15,13 @@ public class MazeGraph
 
     MazeCellNode[] m_nodes;
 
-    public MazeGraph(int graphOrder)
+    public MazeGraph(int graphOrder, int mazeWidth)
     {
         m_nodes = new MazeCellNode[graphOrder];
 
         for (int i = 0; i < graphOrder; ++i)
         {
-            m_nodes[i] = new MazeCellNode(i);
+            m_nodes[i] = new MazeCellNode(i, mazeWidth);
         }
     }
 }

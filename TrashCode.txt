@@ -1,0 +1,171 @@
+
+        Debug.Log(m_player.PrevMazePos);
+        Debug.Log(m_player.MazePos);
+
+        //int pathDistance = 
+        //for (int i = 0; i < length; i++)
+        //{
+
+        //}
+
+        //// A mortal minotaur
+        ////int enemySpeed = 1;
+        //Vector2Int currPos = MazePos;
+        //MazeCellNode currNode = m_world.MapInfo.GetNodeByCoord(currPos);
+
+        ////var node = foundPath[i];
+
+        //int idealDistance = (m_player.MazePos - currNode.Coord).manhattanDistance();
+        //bool canWalkLeft = !m_world.MapInfo.IsWallAt(MazeCellEdges.Left, currPos);
+        //bool canWalkRight = !m_world.MapInfo.IsWallAt(MazeCellEdges.Right, currPos);
+
+        //if (canWalkLeft)
+        //{
+        //    Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Left];
+        //    int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //    if (distanceAfterWalking < idealDistance)
+        //    {
+        //        coordsPath.Add(newCoord);
+        //    }
+        //}
+        //else
+        //{
+        //    // A
+        //    bool canWalkUp = !m_world.MapInfo.IsWallAt(MazeCellEdges.Top, currPos);
+        //    bool canWalkDown = !m_world.MapInfo.IsWallAt(MazeCellEdges.Bottom, currPos);
+
+        //    if (canWalkUp)
+        //    {
+        //        Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Top];
+        //        int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //        if (distanceAfterWalking < idealDistance)
+        //        {
+        //            coordsPath.Add(newCoord);
+        //        }
+        //    }
+
+        //    if (canWalkDown)
+        //    {
+        //        Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Bottom];
+        //        int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //        if (distanceAfterWalking < idealDistance)
+        //        {
+        //            coordsPath.Add(newCoord);
+        //        }
+        //    }
+        //}
+
+        //if (canWalkRight)
+        //{
+        //    Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Right];
+        //    int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //    if (distanceAfterWalking < idealDistance)
+        //    {
+        //        coordsPath.Add(newCoord);
+        //    }
+        //}
+        //else
+        //{
+        //    // A
+        //    bool canWalkUp = !m_world.MapInfo.IsWallAt(MazeCellEdges.Top, currPos);
+        //    bool canWalkDown = !m_world.MapInfo.IsWallAt(MazeCellEdges.Bottom, currPos);
+
+        //    if (canWalkUp)
+        //    {
+        //        Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Top];
+        //        int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //        if (distanceAfterWalking < idealDistance)
+        //        {
+        //            coordsPath.Add(newCoord);
+        //        }
+        //    }
+
+        //    if (canWalkDown)
+        //    {
+        //        Vector2Int newCoord = currNode.Coord + MazeGenerator.DIRECTIONS[MazeCellEdges.Bottom];
+        //        int distanceAfterWalking = (m_player.MazePos - newCoord).manhattanDistance();
+        //        if (distanceAfterWalking < idealDistance)
+        //        {
+        //            coordsPath.Add(newCoord);
+        //        }
+        //    }
+        //}
+
+        //for (int i = 0; i < enemySpeed; ++i)
+        //{
+        //    // Minotaur may be closer
+        //    if (i >= foundPath.Count) break;
+
+        //    var node = foundPath[i];
+
+        //    // Which direction is the ideal direction?
+        //    MazeCellEdges idealDirection = MazeCellEdges.Top;
+        //    for (int j = 0; j < currNode.Connections.Length; ++j)
+        //    {
+        //        if (currNode.Connections[j] == node)
+        //        {
+        //            idealDirection = (MazeCellEdges)j;
+        //            break;
+        //        }
+        //    }
+
+        //    // Is the ideal direction horizontal?
+        //    if (idealDirection == MazeCellEdges.Left || idealDirection == MazeCellEdges.Right)
+        //    {
+        //        // Simply move... no trick here
+        //        coordsPath.Add(node.Coord);
+        //    }
+        //}
+
+        //Vector2Int idealNextStep = foundPath[0];
+
+        //for (int i = 0; i < enemySpeed; i++)
+        //{
+        //    // Minotaur mey be closer
+        //    if (i >= foundPath.Count) break;
+
+        //    var node = foundPath[i];
+
+        //    bool canWalkLeft = !m_world.MapInfo.IsWallAt(MazeCellEdges.Left, currPos);
+        //    bool canWalkRight = !m_world.MapInfo.IsWallAt(MazeCellEdges.Right, currPos);
+
+        //    // Can move horizontally? (can reach next node horizontally?)
+        //    //if (node.Connections[(int)MazeCellEdges.Left] != null || node.Connections[(int)MazeCellEdges.Right] != null)
+        //    if (canWalkLeft || canWalkRight)
+        //    {
+        //        MazeCellEdges direction = canWalkLeft ? MazeCellEdges.Left : canWalkRight ? MazeCellEdges.Right : MazeCellEdges.Left;
+        //        Vector2Int newCoord = currPos + MazeGenerator.DIRECTIONS[direction];
+        //        var newNode = m_world.MapInfo.GetNodeByCoord(newCoord);
+
+        //        // Will get closer?
+        //        if (!visited.Contains(newNode) && WillGetCloserToPlayer(currPos, newCoord))
+        //        {
+        //            // Update for next iteration
+        //            currPos = newCoord;
+        //            coordsPath.Add(newCoord);
+        //            visited.Add(newNode);
+        //            continue;
+        //        }
+        //    }
+
+
+        //    bool isTopWall = m_world.MapInfo.IsWallAt(MazeCellEdges.Top, currPos);
+        //    bool isBottomWall = m_world.MapInfo.IsWallAt(MazeCellEdges.Bottom, currPos);
+
+        //    // Can move vertically?
+        //    if (!isTopWall || !isBottomWall)
+        //    {
+        //        MazeCellEdges direction = isTopWall ? MazeCellEdges.Bottom : MazeCellEdges.Top;
+        //        Vector2Int newCoord = currPos + MazeGenerator.DIRECTIONS[direction];
+        //        var newNode = m_world.MapInfo.GetNodeByCoord(newCoord);
+
+        //        // Will get closer?
+        //        if (!visited.Contains(newNode) && WillGetCloserToPlayer(currPos, newCoord))
+        //        {
+        //            // Update for next iteration
+        //            currPos = newCoord;
+        //            coordsPath.Add(newCoord);
+        //            visited.Add(newNode);
+        //        }
+        //    }
+        //}

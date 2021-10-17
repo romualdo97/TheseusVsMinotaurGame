@@ -28,7 +28,7 @@ public class MazeGenerator
         m_width = width;
         m_height = height;
         m_chanceOfCycles = chanceOfCycles;
-        m_graph = new MazeGraph(width * height);
+        m_graph = new MazeGraph(width * height, width);
         
         // -1 means random seed
         if (seed == -1) m_rng = new System.Random();
@@ -91,6 +91,12 @@ public class MazeGenerator
         return true;
     }
 
+    public MazeCellNode GetNodeByCoord(Vector2Int coord)
+    {
+        int index = coord.x + m_width * coord.y;
+        return m_graph[index];
+    }
+
     public List<Vector2Int> CalculateCoordsPath(List<MazeCellNode> graphPath)
     {
         // Convert the graph path to a coords path
@@ -98,8 +104,7 @@ public class MazeGenerator
         for (int i = 0; i < graphPath.Count; ++i)
         {
             var node = graphPath[i];
-            Vector2Int coord = new Vector2Int(node.Id % m_width, Mathf.FloorToInt((float)node.Id / m_width));
-            path.Add(coord);
+            path.Add(node.Coord);
         }
 
         return path;
