@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public enum MazeCellEdges
 {
+    None = -1,
     Top = 0,
     Bottom = 1,
     Left = 2,
