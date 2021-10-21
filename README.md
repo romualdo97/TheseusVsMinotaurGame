@@ -11,10 +11,11 @@ A Unity mini game for a mini jam session.
 - [ready] Define a maze graph
 - [ready] Write pathfinding
 ### >4 hours
-- [not as requested] Player logic
-- [not as requested] Input logic
-- [not as requested] Enemy logic
-- [ready] UI logic
+- [ready] Player logic
+- [ready] Input logic
+- [ready] Enemy logic
+- [progress] UI logic
+- [progress] Maze solver
 
 ---
 ## Author

@@ -49,9 +49,10 @@ public class MazeGenerator
 
     public bool IsWallAt(MazeCellEdges cellEdge, Vector2Int cellCoord)
     {
-        bool isValid = IsValidCoord(cellCoord);
-        if (!isValid) return false;
+        // Assume wall if something invalid was passed
+        if (cellEdge == MazeCellEdges.None || !IsValidCoord(cellCoord)) return true;
 
+        // Check if cell node has connections
         int cellIndex = cellCoord.x + m_width * cellCoord.y;
         return m_graph[cellIndex].Connections[(int)cellEdge] == null;
     }

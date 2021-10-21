@@ -16,7 +16,7 @@ public enum MazeCellEdges
 public class MazeCellNode
 {
     // Simple table for opposite edges
-    private static readonly Dictionary<MazeCellEdges, MazeCellEdges> OPPOSITES = new Dictionary<MazeCellEdges, MazeCellEdges>()
+    public static readonly Dictionary<MazeCellEdges, MazeCellEdges> OPPOSITES = new Dictionary<MazeCellEdges, MazeCellEdges>()
     {
         { MazeCellEdges.Top, MazeCellEdges.Bottom },
         { MazeCellEdges.Bottom, MazeCellEdges.Top },
