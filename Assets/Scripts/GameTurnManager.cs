@@ -15,6 +15,7 @@ public class GameTurnManager : MonoBehaviour
     [SerializeField]
     private Enemy m_enemy;
 
+    private Queue<TurnCommands> m_allTurns = new Queue<TurnCommands>();
     private TurnCommands m_turn;
     private TurnCommands m_prevTurn;
     private int m_activeCommand = 0;
@@ -27,19 +28,38 @@ public class GameTurnManager : MonoBehaviour
         if (m_turn[m_activeCommand].Started && m_turn[m_activeCommand].IsCompleted())
         {
             UpdateActiveCommand();
+
+            // Commands in turns finished...
             if (!IsNextCommand())
             {
+                // Avoid cyclic undo/redo
                 if (!m_isUndoing) m_prevTurn = m_turn;
                 m_turn = null;
 
                 // Trigger end turn events
                 TriggerEndTurnEvents();
 
+                // Dequeues a new turn if prev already completed
+                if (m_allTurns.Count > 0) ExecuteTurn(m_allTurns.Dequeue());
                 return;
             }
 
             ExecuteNextCommand();
         }
+    }
+
+    public void AddTurns(params TurnCommands[] turns) // Schedules a sequence of turns... useful for the solver
+    {
+        if (turns.Length == 0) throw new System.InvalidOperationException("You must specify at least one turn to execute.");
+
+        // Enqueue a sequence of turns
+        foreach (var turn in turns)
+        {
+            m_allTurns.Enqueue(turn);
+        }
+
+        // Execute the first turn
+        ExecuteTurn(m_allTurns.Dequeue());
     }
 
     public void ExecuteTurn(TurnCommands commands)
