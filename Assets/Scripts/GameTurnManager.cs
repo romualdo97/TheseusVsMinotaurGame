@@ -7,6 +7,9 @@ public class GameTurnManager : MonoBehaviour
     public bool IsExecutingTurn { get => m_turn != null; }
 
     [SerializeField]
+    private MazeWorld m_world;
+
+    [SerializeField]
     private Player m_player;
 
     [SerializeField]
@@ -29,14 +32,8 @@ public class GameTurnManager : MonoBehaviour
                 if (!m_isUndoing) m_prevTurn = m_turn;
                 m_turn = null;
 
-                if (PlayerSucceedTurn())
-                {
-                    Debug.Log("Ok");
-                }
-                else
-                {
-                    Debug.Log("Failed");
-                }
+                // Trigger end turn events
+                TriggerEndTurnEvents();
 
                 return;
             }
@@ -103,8 +100,21 @@ public class GameTurnManager : MonoBehaviour
         }
     }
 
-    private bool PlayerSucceedTurn()
+    private void TriggerEndTurnEvents()
     {
-        return m_player.MazePos != m_enemy.MazePos;
+        if (m_player.MazePos != m_enemy.MazePos)
+        {
+            Debug.LogFormat("<color=yellow>{0}</color>", "Ok!!!");
+
+            if (m_player.MazePos == m_world.CurrentLevel.Exit)
+            {
+                Debug.LogFormat("<color=green>{0}</color>", "Level passed!!!");
+            }
+        }
+        else
+        {
+            Debug.LogFormat("<color=red>{0}</color>", "Failed!");
+        }
     }
+
 }

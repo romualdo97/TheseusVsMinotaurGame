@@ -23,6 +23,13 @@ public class MazeLevel : ScriptableObject
     [Range(0f, 1f)]
     public float ChanceOfCycles = 0;
 
+    [Header("Win condition")]
+    [Tooltip("A coord outside and adjacent to the world which will be considered the exit node")]
+    public Vector2Int Exit = new Vector2Int(-1, 0);
+
+    [Tooltip("What edge of the exit node is connected to the world")]
+    public MazeCellEdges ExitConnectedEdge = MazeCellEdges.Right;
+
     [Header("Entities")]
     [Tooltip("The initial coord of the player, invalid coord means random initial pos")]
     public Vector2Int PlayerPos;

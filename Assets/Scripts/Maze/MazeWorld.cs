@@ -36,40 +36,43 @@ public class MazeWorld : MonoBehaviour
 
     public MazeGenerator MapInfo { get => m_mazeGenerator; }
 
-    [Header("Data")]
+    [Header("Levels")]
     [SerializeField]
-    private MazeLevel m_mazeLevelData = null;
+    private LevelsList m_levels = null;
 
     [Header("Prefabs")]
     [SerializeField]
     private GameObject m_cellPrefab = null;
 
+    [SerializeField]
+    private GameObject m_exitCellPrefab = null;
+
+
     // Internals
+    private MazeLevel m_mazeLevelData = null;
     private MazeGenerator m_mazeGenerator = null;
 
     private void Start()
     {
         // Some assertions
-        Assert.IsNotNull(m_mazeLevelData, "Please define the first level data");
-        Assert.IsNotNull(m_cellPrefab, "Please define the cell prefab");
+        Assert.IsNotNull(m_levels, "Please set the levels reference");
+        Assert.IsNotNull(m_cellPrefab, "Please set the cell prefab");
+        Assert.IsNotNull(m_exitCellPrefab, "Please set the exit cell prefab");
         Assert.IsTrue(s_instanceCount == 0, "World was already instanced... you should guarantee only one World in this scene."); Assert.IsTrue(s_instanceCount == 0, "World was already instanced... you should guarantee only one World in this scene.");
 
         // Init singleton
         Instance = this;
         ++s_instanceCount;
 
-        // Setup the world generator
-        SetupMazeGenerator();
-
-        // Render the world
-        RenderWorld();
+        // Set the current level
+        CurrentLevel = m_levels.Levels[0];
     }
 
     private void SetupMazeGenerator()
     {
         // Generate world
         m_mazeGenerator = new MazeGenerator(m_mazeLevelData.Width, m_mazeLevelData.Height, m_mazeLevelData.Seed, m_mazeLevelData.ChanceOfCycles);
-        m_mazeGenerator.GenerateWorld();
+        m_mazeGenerator.GenerateWorld(m_mazeLevelData.Exit, m_mazeLevelData.ExitConnectedEdge);
 
         // Init the unity seed
         Random.InitState(m_mazeLevelData.Seed);
@@ -106,5 +109,9 @@ public class MazeWorld : MonoBehaviour
                 cellObject.transform.GetChild((int)MazeCellEdges.Right).gameObject.SetActive(false);
             }
         }
+
+        // Create the exit cell
+        var exitCellObject = Instantiate(m_exitCellPrefab, transform);
+        exitCellObject.transform.localPosition = new Vector3((float)m_mazeLevelData.Exit.x + 0.5f, 0, (float)m_mazeLevelData.Exit.y + 0.5f);
     }
 }

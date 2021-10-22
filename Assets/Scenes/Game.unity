@@ -509,8 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5a42c5bb3e47f4a8e88d1a3f8fdcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mazeLevelData: {fileID: 11400000, guid: 0f7ad500800870345b43f0490f6eb480, type: 2}
+  m_levels: {fileID: 11400000, guid: c1fa135042e9d5741bc0576a835ba1eb, type: 2}
   m_cellPrefab: {fileID: 4436072538800910121, guid: a9a6349c52f0ca14889f3739a0e85483, type: 3}
+  m_exitCellPrefab: {fileID: 4436072538800910121, guid: bdfd8b8962ce38b4eb7e8cbb17c15ec1, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace201c72a1687846ad974beb615fa2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_world: {fileID: 401933274}
   m_player: {fileID: 1689883957}
   m_enemy: {fileID: 740037174}
 --- !u!1 &1996526044

@@ -15,7 +15,7 @@ public class TurnCommands
     public TurnCommands(Player player, Enemy enemy, MazeCellEdges dir)
     {
         m_commands[0] = new MovePlayerCommand(player, dir);
-        m_commands[1] = new MoveEnemyCommand(enemy, player);
-        m_commands[2] = new MoveEnemyCommand(enemy, player);
+        m_commands[1] = new MoveEnemyCommand(enemy);
+        m_commands[2] = new MoveEnemyCommand(enemy);
     }
 }

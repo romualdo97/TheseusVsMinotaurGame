@@ -22,20 +22,25 @@ public class MazeGenerator
     private float m_chanceOfCycles;
     private MazeGraph m_graph;
     private System.Random m_rng; // Intentionally not using UnityEngine.Random
+    
+    // Exit node related
+    private Vector2Int m_exitNodeCoord = new Vector2Int(int.MinValue, int.MinValue);
+    private Vector2Int m_mazeToExitNodeCoord = new Vector2Int(int.MinValue, int.MinValue);
+    private MazeCellEdges m_mazeToExitNodeEdge = MazeCellEdges.None;
 
     public MazeGenerator(int width, int height, int seed = -1, float chanceOfCycles = 0)
     {
         m_width = width;
         m_height = height;
         m_chanceOfCycles = chanceOfCycles;
-        m_graph = new MazeGraph(width * height, width);
+        m_graph = new MazeGraph(width * height + 1, width); // Adds 1 additional space for the exit node
         
         // -1 means random seed
         if (seed == -1) m_rng = new System.Random();
         else m_rng = new System.Random(seed);
     }
 
-    public void GenerateWorld()
+    public void GenerateWorld(Vector2Int exitNodeCoord, MazeCellEdges exitNodeConnectedEdge)
     {
         // 1. Let's use some recursive backtracker for generating the maze nodes
         // this will generate a spanning tree (which is dual graph of the rectangular grid graph)...
@@ -45,12 +50,25 @@ public class MazeGenerator
         // 2. Then we randomly add cell connections so our maze is not only a tree of corridors but a maze with some rooms
         // (add some cyclic connections to the maze graph) like in minotaur demo... https://estivalet.github.io/theseus-minotaur/
         CreateCycles();
+
+        // 3. Add the exit node
+        ConnectExitNode(exitNodeCoord, exitNodeConnectedEdge);
     }
 
     public bool IsWallAt(MazeCellEdges cellEdge, Vector2Int cellCoord)
     {
         // Assume wall if something invalid was passed
         if (cellEdge == MazeCellEdges.None || !IsValidCoord(cellCoord)) return true;
+
+        // Consider the exit node
+        if (cellCoord == m_mazeToExitNodeCoord && cellEdge == m_mazeToExitNodeEdge)
+        {
+            return false;
+        }
+        else if (cellCoord == m_exitNodeCoord)
+        {
+            return m_graph[m_graph.Order - 1].Connections[(int)cellEdge] == null;
+        }
 
         // Check if cell node has connections
         int cellIndex = cellCoord.x + m_width * cellCoord.y;
@@ -59,7 +77,7 @@ public class MazeGenerator
 
     public bool IsValidCoord(Vector2Int cellCoord)
     {
-        return cellCoord.x >= 0 && cellCoord.x < m_width && cellCoord.y >= 0 && cellCoord.y < m_height;
+        return cellCoord.x >= 0 && cellCoord.x < m_width && cellCoord.y >= 0 && cellCoord.y < m_height || cellCoord == m_exitNodeCoord;
     }
 
     public bool SearchPath(Vector2Int start, Vector2Int end, out List<MazeCellNode> path)
@@ -94,6 +112,10 @@ public class MazeGenerator
 
     public MazeCellNode GetNodeByCoord(Vector2Int coord)
     {
+        // Consider the exit node
+        if (coord == m_exitNodeCoord) return m_graph[m_graph.Order - 1];
+
+        // Consider other nodes
         int index = coord.x + m_width * coord.y;
         return m_graph[index];
     }
@@ -149,6 +171,23 @@ public class MazeGenerator
 #else
         CreateCyclesUsingRandomHoleAtGrid();
 #endif
+    }
+
+    private void ConnectExitNode(Vector2Int exitNodeCoord, MazeCellEdges exitNodeConnectedEdge)
+    {
+        int exitNodeIndex = m_graph.Order - 1;
+        Vector2Int mazeCoord = exitNodeCoord + DIRECTIONS[exitNodeConnectedEdge];
+        MazeCellNode mazeNode = GetNodeByCoord(mazeCoord);
+        MazeCellNode exitNode = m_graph[exitNodeIndex];
+
+        // Connect the maze to exit node
+        exitNode.Coord = exitNodeCoord;
+        exitNode.Connect(exitNodeConnectedEdge, mazeNode);
+
+        // Useful for getters
+        m_exitNodeCoord = exitNodeCoord;
+        m_mazeToExitNodeCoord = mazeCoord;
+        m_mazeToExitNodeEdge = MazeCellNode.OPPOSITES[exitNodeConnectedEdge];
     }
 
     private void CreateCyclesUsingBreadthSearch()

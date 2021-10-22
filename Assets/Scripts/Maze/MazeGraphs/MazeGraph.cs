@@ -13,6 +13,8 @@ public class MazeGraph
         get => m_nodes[index];
     }
 
+    public int Order { get => m_nodes.Length; }
+
     MazeCellNode[] m_nodes;
 
     public MazeGraph(int graphOrder, int mazeWidth)

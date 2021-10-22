@@ -17,5 +17,7 @@ MonoBehaviour:
   Height: 3
   Seed: 298
   ChanceOfCycles: 0.238
+  Exit: {x: -1, y: 1}
+  ExitConnectedEdge: 3
   PlayerPos: {x: 1, y: 2}
   EnemyPos: {x: 1, y: 0}
