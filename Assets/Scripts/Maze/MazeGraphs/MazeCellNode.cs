@@ -26,10 +26,10 @@ public class MazeCellNode
 
     // Public properties
     public int Id { get; private set; }
-    public MazeCellNode[] Connections { get => m_connections; }
-    public bool HasConnections { get; private set; }
     public Vector2Int Coord { get => m_coord; set => m_coord = value; }
-
+    public MazeCellNode[] Connections { get => m_connections; }
+    public bool HasConnections { get => TotalConnections > 0; }
+    public int TotalConnections { get; private set; }
 
     // The connections/edges of this node (only 4 for each cell)
     private MazeCellNode[] m_connections = new MazeCellNode[4] { null, null, null, null };
@@ -46,7 +46,17 @@ public class MazeCellNode
         m_connections[(int)edge] = other;
         other.m_connections[(int)OPPOSITES[edge]] = this;
 
-        other.HasConnections = true;
-        HasConnections = true;
+        // Calculate total connections
+        CalculateTotalConnections();
+        other.CalculateTotalConnections();
+    }
+
+    private void CalculateTotalConnections()
+    {
+        TotalConnections = 0;
+        foreach (var connection in m_connections)
+        {
+            if (connection != null) ++TotalConnections;
+        }
     }
 }

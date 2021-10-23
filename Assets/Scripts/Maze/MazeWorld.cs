@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Assertions;
 
 [DefaultExecutionOrder(-1)]
@@ -9,6 +10,8 @@ public class MazeWorld : MonoBehaviour
     // No need for scene lookup because we will assume this component will awake before than any other
     public static MazeWorld Instance { get; private set; }
     private static int s_instanceCount = 0;
+
+    public UnityEvent LevelStarted;
 
     // Properties
     public MazeLevel CurrentLevel {
@@ -31,6 +34,9 @@ public class MazeWorld : MonoBehaviour
 
             // Render the world
             RenderWorld();
+
+            // Invoke event
+            LevelStarted?.Invoke();
         }
     }
 

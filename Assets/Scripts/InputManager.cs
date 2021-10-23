@@ -5,11 +5,16 @@ using UnityEngine.Assertions;
 
 public class InputManager : MonoBehaviour
 {
+    public bool InputEnabled { get; set; } = true;
+
     [SerializeField]
     private MazeWorld m_world;
 
     [SerializeField]
     private GameTurnManager m_turnManager;
+
+    [SerializeField]
+    private MazeSolver m_solver;
 
     [SerializeField]
     private Player m_player;
@@ -25,7 +30,22 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if (!m_player.IsInitialized || !m_enemy.IsInitialized || m_turnManager.IsExecutingTurn) return;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            m_world.CurrentLevel = m_world.CurrentLevel;
+            InputEnabled = true;
+            return;
+        }
+
+        if (!m_player.IsInitialized || !m_enemy.IsInitialized || m_turnManager.IsExecutingTurn || !InputEnabled) return;
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            TurnCommands[] turns = m_solver.DoSolve();
+            if (turns != null) m_turnManager.AddTurns(turns);
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -8,6 +8,9 @@ public class MazeLevel : ScriptableObject
 {
     [Header("Metadata")]
     public string Name = "Mocky pocky";
+    public Vector3 CameraPos = new Vector3(0, 0, 10);
+    public float CameraFov = 60;
+    public Color CameraClearColor;
 
     [Header("World")]
     [Tooltip("How many horizontal cells for the maze?")]

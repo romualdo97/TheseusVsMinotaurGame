@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 public class UILevelSelector : MonoBehaviour
 {
-    public UnityEvent LevelRestarted;
-
     [SerializeField]
     private LevelsList m_levels;
 
@@ -31,7 +29,6 @@ public class UILevelSelector : MonoBehaviour
         m_currentLevelIndex = m_currentLevelIndex % m_levels.Levels.Count;
         m_world.CurrentLevel = m_levels.Levels[m_currentLevelIndex];
         m_levelName.text = m_world.CurrentLevel.Name;
-        LevelRestarted.Invoke();
     }
 
     public void PrevLevel()
@@ -40,6 +37,5 @@ public class UILevelSelector : MonoBehaviour
         if (m_currentLevelIndex < 0) m_currentLevelIndex = m_levels.Levels.Count - 1;
         m_world.CurrentLevel = m_levels.Levels[m_currentLevelIndex];
         m_levelName.text = m_world.CurrentLevel.Name;
-        LevelRestarted.Invoke();
     }
 }

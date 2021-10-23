@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: ThirdMazeLevel
+  m_Name: 5. FifthLevel
   m_EditorClassIdentifier: 
-  Name: Easy exit
-  Width: 10
-  Height: 10
-  Seed: 29
-  ChanceOfCycles: 0.408
-  Exit: {x: -1, y: 1}
+  Name: Good Bye
+  CameraPos: {x: -4.5, y: 11.7, z: -3.4}
+  CameraFov: 60
+  CameraClearColor: {r: 1, g: 0.43921566, b: 0.7799756, a: 0}
+  Width: 5
+  Height: 5
+  Seed: 86
+  ChanceOfCycles: 0.591
+  Exit: {x: -1, y: 2}
   ExitConnectedEdge: 3
-  PlayerPos: {x: 0, y: 0}
+  PlayerPos: {x: 4, y: 2}
   EnemyPos: {x: 0, y: 0}

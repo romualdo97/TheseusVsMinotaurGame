@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: SecondMazeLevel
+  m_Name: 3. ThirdLevel
   m_EditorClassIdentifier: 
-  Name: Mocky pocky
-  Width: 2
-  Height: 2
-  Seed: -1
-  ChanceOfCycles: 0
-  Exit: {x: -1, y: 1}
-  ExitConnectedEdge: 3
-  PlayerPos: {x: 0, y: 0}
-  EnemyPos: {x: 0, y: 0}
+  Name: Lovers
+  CameraPos: {x: 7.1, y: 13.4, z: -4.62}
+  CameraFov: 60
+  CameraClearColor: {r: 0.990566, g: 0.41585082, b: 0.44368562, a: 0}
+  Width: 6
+  Height: 6
+  Seed: 126
+  ChanceOfCycles: 0.469
+  Exit: {x: 6, y: 0}
+  ExitConnectedEdge: 2
+  PlayerPos: {x: 0, y: 3}
+  EnemyPos: {x: 5, y: 2}

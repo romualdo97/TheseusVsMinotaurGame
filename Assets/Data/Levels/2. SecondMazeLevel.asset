@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: PerfectSubtree
+  m_Name: 2. SecondMazeLevel
   m_EditorClassIdentifier: 
-  Name: Perfect Subtree
-  Width: 10
-  Height: 10
-  Seed: 29
-  ChanceOfCycles: 0
-  Exit: {x: -1, y: 1}
+  Name: Dummy world
+  CameraPos: {x: 0.2, y: 18.3, z: -0.15}
+  CameraFov: 48
+  CameraClearColor: {r: 0.69411767, g: 1, b: 0.7254902, a: 0}
+  Width: 5
+  Height: 5
+  Seed: 50
+  ChanceOfCycles: 0.329
+  Exit: {x: -1, y: 0}
   ExitConnectedEdge: 3
-  PlayerPos: {x: 0, y: 0}
+  PlayerPos: {x: 4, y: 4}
   EnemyPos: {x: 0, y: 0}

@@ -7,10 +7,16 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     private Transform m_target;
 
-    // Start is called before the first frame update
-    void Start()
+    private Camera m_camera;
+    private MazeWorld m_world;
+
+    public void OnLevelStarted()
     {
-        
+        m_world = MazeWorld.Instance;
+        m_camera = GetComponent<Camera>();
+        m_camera.backgroundColor = m_world.CurrentLevel.CameraClearColor;
+        m_camera.transform.position = m_world.CurrentLevel.CameraPos;
+        m_camera.fieldOfView = m_world.CurrentLevel.CameraFov;
     }
 
     private void Update()

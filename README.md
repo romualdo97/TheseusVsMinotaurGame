@@ -14,9 +14,14 @@ A Unity mini game for a mini jam session.
 - [ready] Player logic
 - [ready] Input logic
 - [ready] Enemy logic
-- [progress] UI logic
-- [progress] Maze solver
+- [ready] UI logic
+- [ready] Maze solver
 
+## Controls
+- `Arrows`: Move
+- `Esc`: Undo move
+- `H`: Execute the solver... does nothing if you have no hope
+- `R`: Reset current level
 ---
 ## Author
 

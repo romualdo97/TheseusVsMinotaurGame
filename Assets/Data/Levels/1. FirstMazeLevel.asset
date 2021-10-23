@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: FirstMazeLevel
+  m_Name: 1. FirstMazeLevel
   m_EditorClassIdentifier: 
   Name: No hope for Theseus
+  CameraPos: {x: -1.27, y: 8.65, z: -1.78}
+  CameraFov: 60
+  CameraClearColor: {r: 0.5882353, g: 0.42745098, b: 1, a: 0}
   Width: 3
   Height: 3
   Seed: 298

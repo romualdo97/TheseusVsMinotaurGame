@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameTurnManager : MonoBehaviour
 {
     public bool IsExecutingTurn { get => m_turn != null; }
+
+    public UnityEvent TurnEndedGood;
+    public UnityEvent TurnEndedBad;
+    public UnityEvent LevelCompleted;
 
     [SerializeField]
     private MazeWorld m_world;
@@ -125,16 +130,18 @@ public class GameTurnManager : MonoBehaviour
         if (m_player.MazePos != m_enemy.MazePos)
         {
             Debug.LogFormat("<color=yellow>{0}</color>", "Ok!!!");
+            TurnEndedGood?.Invoke();
 
             if (m_player.MazePos == m_world.CurrentLevel.Exit)
             {
                 Debug.LogFormat("<color=green>{0}</color>", "Level passed!!!");
+                LevelCompleted?.Invoke();
             }
         }
         else
         {
             Debug.LogFormat("<color=red>{0}</color>", "Failed!");
+            TurnEndedBad?.Invoke();
         }
     }
-
 }

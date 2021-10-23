@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd08d7845a87c14c9f99dfb40a5ffec, type: 3}
-  m_Name: AlmostEmpty
+  m_Name: 4. FourthLevel
   m_EditorClassIdentifier: 
-  Name: Almost Empty
+  Name: Crazy
+  CameraPos: {x: -4.5, y: 21.6, z: -6.6}
+  CameraFov: 60
+  CameraClearColor: {r: 0.75686276, g: 1, b: 0.4392157, a: 0}
   Width: 10
   Height: 10
-  Seed: 29
-  ChanceOfCycles: 0.945
-  Exit: {x: -1, y: 1}
+  Seed: 86
+  ChanceOfCycles: 0.475
+  Exit: {x: -1, y: 0}
   ExitConnectedEdge: 3
-  PlayerPos: {x: 0, y: 0}
-  EnemyPos: {x: 0, y: 0}
+  PlayerPos: {x: 5, y: 5}
+  EnemyPos: {x: 3, y: 0}
