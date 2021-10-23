@@ -20,7 +20,7 @@ A Unity mini game for a mini jam session.
 ## Controls
 - `Arrows`: Move
 - `Esc`: Undo move
-- `H`: Execute the solver... does nothing if you have no hope
+- `H`: Execute the solver... does nothing if you can't scape from current maze state
 - `R`: Reset current level
 ---
 ## Author
